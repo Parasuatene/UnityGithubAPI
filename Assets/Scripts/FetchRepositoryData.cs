@@ -13,7 +13,7 @@ public class FetchRepositoryData : MonoBehaviour
     void Start()
     {
         print("start関数");
-        StartCoroutine("StartConnection");
+        //StartCoroutine("StartConnection");
     }
 
     // Update is called once per frame
@@ -39,18 +39,13 @@ public class FetchRepositoryData : MonoBehaviour
             print(www.text);
             string fetchJson = www.text;
 
-            // -----------------------------
-            // JSONをDictionaryに変換する処理
-            // -----------------------------
-            //Dictionary<string, object> fetchApiDic = Json.Deserialize(fetchJson) as Dictionary<string, object>;
-
             // JSONデータは最初は配列から始まるので、Deserialize（デコード）した直後にリストへキャスト      
             IList fetchRepoList = (IList)Json.Deserialize(fetchJson);
-            
+
             List<Dictionary<string, string>> itemDicList = new List<Dictionary<string, string>>();
 
             foreach(IDictionary fetch in fetchRepoList){
-                string total_count = (string)fetch["total_count"];
+                string total_count = fetch["total_count"].ToString();
                 IList items = (IList)fetch["items"];
 
                 foreach (IDictionary item in items)
@@ -58,7 +53,7 @@ public class FetchRepositoryData : MonoBehaviour
                     Dictionary<string, string> itemDic = new Dictionary<string, string>();
                     itemDic.Add("name", (string)item["name"]);
                     itemDic.Add("full_name", (string)item["full_name"]);
-                    itemDic.Add("url", (string)item["url"]);
+                    itemDic.Add("html_url", (string)item["html_url"]);
 
                     // リストに追加
                     itemDicList.Add(itemDic);
@@ -67,7 +62,7 @@ public class FetchRepositoryData : MonoBehaviour
 
             print("name: " + itemDicList[0]["name"]);
             print("full_name: " + itemDicList[0]["full_name"]);
-            print("url: " + itemDicList[0]["url"]);
+            print("html_url: " + itemDicList[0]["html_url"]);
 
         }
     }

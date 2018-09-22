@@ -5,13 +5,13 @@
         "id": 10270250,
         "name": "react",
         "full_name": "facebook/react",
-        "url": "https://api.github.com/repos/facebook/react"
+        "html_url": "https://github.com/facebook/react"
       },
       {
         "id": 29028775,
         "name": "react-native",
         "full_name": "facebook/react-native",
-        "url": "https://api.github.com/repos/facebook/react-native"
+        "html_url": "https://github.com/facebook/react-native"
       }
-  ]
+    ]
 }
