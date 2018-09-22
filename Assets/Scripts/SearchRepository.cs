@@ -1,0 +1,79 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using MiniJSON;
+
+public class SearchRepository : MonoBehaviour
+{
+
+    private string url = "https://api.github.com/search/repositories?";
+    private string form = "q=React&order=desc";
+    private string total_count; // 検索ヒット数
+    public List<Dictionary<string, string>> reposDic;
+
+    // Use this for initialization
+    void Start()
+    {
+        url = url + form;
+        StartCoroutine("StartConnection");
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+    public IEnumerator StartConnection()
+    {
+        print("コルーチン開始");
+
+        using (WWW www = new WWW(url))
+        {
+            while (!www.isDone)
+            { // ダウンロードの進捗を表示
+                print(Mathf.CeilToInt(www.progress * 100));
+                yield return null;
+            }
+
+            yield return www;
+            print(www.text);
+
+            // JSONデータをDeserialize, その後リストへとキャスト
+            IList reposList = (IList)Json.Deserialize(ConvertToArray(www.text));
+
+            reposDic = new List<Dictionary<string, string>>();
+
+            foreach(IDictionary repo in reposList)
+            {
+                total_count = repo["total_count"].ToString();
+                IList items = (IList)repo["items"];
+
+                foreach (IDictionary item in items)
+                {
+                    Dictionary<string, string> itemDic = new Dictionary<string, string>();
+
+                    itemDic.Add("full_name", item["full_name"].ToString()); // "親リポジトリ名/子リポジトリ名"
+                    itemDic.Add("html_url", item["html_url"].ToString()); // リポジトリのリンク先
+                    itemDic.Add("updated_at", item["updated_at"].ToString()); // 最終更新日時
+                    itemDic.Add("open_issues_count", item["open_issues_count"].ToString()); // 使用プログラム言語
+                    itemDic.Add("stargazers_count", item["stargazers_count"].ToString()); // スターの数
+
+                    reposDic.Add(itemDic);
+                }
+            }
+
+            print("full_name: " + reposDic[0]["full_name"]);
+            print("html_url: " + reposDic[0]["html_url"]);
+            print("updated_at: " + reposDic[0]["updated_at"]);
+            print("open_issues_count: " + reposDic[0]["open_issues_count"]);
+            print("stargazers_count: " + reposDic[0]["stargazers_count"]);
+
+        }
+    }
+
+    private string ConvertToArray(string fetchText){
+        return "[" + fetchText + "]";
+    }
+}
