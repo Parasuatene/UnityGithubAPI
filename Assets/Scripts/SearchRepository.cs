@@ -9,8 +9,7 @@ public class SearchRepository : MonoBehaviour
     private string url = "https://api.github.com/search/repositories?";
     private string total_count; // 検索ヒット数
     public List<Dictionary<string, string>> reposDic;
-    [SerializeField] GameObject canvas;
-    [SerializeField] GameObject scrollView;
+    [SerializeField] GameObject scrollManager;
 
     public IEnumerator StartConnection(string queryParam)
     {
@@ -60,9 +59,7 @@ public class SearchRepository : MonoBehaviour
                 }
             }
 
-            // ScrollViewに表示させる
-            Instantiate(scrollView).transform.SetParent(canvas.transform, false);
-            scrollView.GetComponent<CreateScrollContent>().CreateRepoNode(total_count, reposDic);
+            scrollManager.GetComponent<ScrollManager>().CreateRepoNode(total_count, reposDic);
         }
         catch{
             Debug.Log("データを取得できませんでした。\nネットワークに接続されているか確認してください。");
