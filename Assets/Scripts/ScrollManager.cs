@@ -17,6 +17,7 @@ public class ScrollManager : MonoBehaviour {
 
         // Content取得
         content = prefab.transform.Find("Viewport/Content").GetComponent<RectTransform>();
+        prefab.transform.Find("Header/Page").GetComponent<Text>().text = "Page: " + GameObject.Find("QueryParamManager").GetComponent<QueryParamManager>().GetPageNumber().ToString();
 
         // Contentの高さ決定
         // (repoNodeの高さ + repoNode同士の間隔)*repoNodeの個数

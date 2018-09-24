@@ -6,13 +6,13 @@ using MiniJSON;
 
 public class SearchRepository : MonoBehaviour
 {
-    private string url = "https://api.github.com/search/repositories?";
     private string total_count; // 検索ヒット数
     public List<Dictionary<string, string>> reposDic;
     [SerializeField] GameObject scrollManager;
 
     public IEnumerator StartConnection(string queryParam)
     {
+        string url = "https://api.github.com/search/repositories?";
         url = url + queryParam;
         string jsonText;
 

@@ -25,11 +25,11 @@ public class QueryParamManager : MonoBehaviour
     }
 
     public void ReCreateQueryParam(int pageNumber){
+        print("paging開始");
         this.pageNumber = pageNumber;
-        GameObject.Find("Canvas/ScrollView/Header/Page").GetComponent<Text>().text = "Page: " + pageNumber.ToString();
         string pageParam = "page=" + pageNumber;
         string reQueryParam = pageParam + repoParam + sortParam + orderParam;
-        StartCoroutine(GameObject.Find("SeardhRepository").GetComponent<SearchRepository>().StartConnection(reQueryParam));
+        StartCoroutine(GameObject.Find("SearchRepository").GetComponent<SearchRepository>().StartConnection(reQueryParam));
     }
 
     public int GetPageNumber()
