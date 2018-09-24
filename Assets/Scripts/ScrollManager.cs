@@ -8,14 +8,9 @@ public class ScrollManager : MonoBehaviour {
     [SerializeField] GameObject canvas;
     [SerializeField] GameObject repoNode;
     [SerializeField] GameObject scrollView;
-    [SerializeField] GameObject prevButton;
-    [SerializeField] GameObject nextButton;
-    private string url;
     RectTransform content;
 
-
-
-    public void CreateRepoNode(string url, string total_count, List<Dictionary<string,string>> reposDic){
+    public void CreateRepoNode(string total_count, List<Dictionary<string,string>> reposDic){
 
         GameObject prefab = Instantiate(scrollView) as GameObject;
         prefab.transform.SetParent(canvas.transform, false);
@@ -36,9 +31,5 @@ public class ScrollManager : MonoBehaviour {
             node.transform.SetParent(content, false);
             node.transform.GetComponent<RepositoryNode>().InitParam(reposDic[i]["full_name"], reposDic[i]["html_url"]);
         }
-    }
-
-    public void PrevButton(){
-
     }
 }
