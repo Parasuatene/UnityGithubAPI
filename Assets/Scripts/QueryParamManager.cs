@@ -23,6 +23,12 @@ public class QueryParamManager : MonoBehaviour
         return pageParam + repoParam + sortParam + orderParam;
     }
 
+    public void ReCreateQueryParam(int pageNumber){
+        string pageParam = "page=" + pageNumber;
+        string reQueryParam = pageParam + repoParam + sortParam + orderParam;
+        StartCoroutine(GameObject.Find("SeardhRepository").GetComponent<SearchRepository>().StartConnection(reQueryParam));
+    }
+
     public int GetPageNumber()
     {
         return this.pageNumber;

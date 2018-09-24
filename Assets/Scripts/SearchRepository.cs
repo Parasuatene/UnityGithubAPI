@@ -70,4 +70,8 @@ public class SearchRepository : MonoBehaviour
     private string ConvertToArray(string fetchText){
         return "[" + fetchText + "]";
     }
+
+    public int MaxPageNumber(){
+        return (int.Parse(total_count) / 30) + 1;
+    }
 }
