@@ -58,14 +58,17 @@ public class SearchRepository : MonoBehaviour
                 }
             }
 
-            print("full_name: " + reposDic[0]["full_name"]);
-            print("html_url: " + reposDic[0]["html_url"]);
-            print("updated_at: " + reposDic[0]["updated_at"]);
-            print("open_issues_count: " + reposDic[0]["open_issues_count"]);
-            print("stargazers_count: " + reposDic[0]["stargazers_count"]);
+            for (int i = 0; i < reposDic.Count; i++){
+                print("full_name: " + reposDic[i]["full_name"]);
+                print("html_url: " + reposDic[i]["html_url"]);
+                print("updated_at: " + reposDic[i]["updated_at"]);
+                print("open_issues_count: " + reposDic[i]["open_issues_count"]);
+                print("stargazers_count: " + reposDic[i]["stargazers_count"]);
+                print("----------------------------------------------");
+            }
         }
         catch{
-            Debug.Log("データを取得できませんでした。");
+            Debug.Log("データを取得できませんでした。\nネットワークに接続されているか確認してください。");
         }
 
     }

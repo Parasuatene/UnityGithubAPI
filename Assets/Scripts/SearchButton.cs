@@ -38,7 +38,7 @@ public class SearchButton : MonoBehaviour {
         //Application.OpenURL("https://github.com/reactnativecn/react-native-guide");
 
         // 通信開始
-        //StartCoroutine(searchRepo.StartConnection(queryParam));
+        StartCoroutine(searchRepo.StartConnection(queryParam));
     }
 
     // 与えられたパラメータからクエリを作成して返却
