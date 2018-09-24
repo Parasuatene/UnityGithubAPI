@@ -60,6 +60,7 @@ GameObject:
   - component: {fileID: 114984711120620678}
   - component: {fileID: 114083138982064796}
   - component: {fileID: 114880210258319764}
+  - component: {fileID: 114422972993327842}
   m_Layer: 5
   m_Name: RepositoryNode
   m_TagString: Untagged
@@ -111,6 +112,17 @@ MonoBehaviour:
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 1
   m_ChildControlHeight: 1
+--- !u!114 &114422972993327842
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1772713518218214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 979e23d0f057f42c98f4b3011a8605c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114568165871618808
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -149,7 +161,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114993444810008584}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114422972993327842}
+        m_MethodName: JumpToLink
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114734788300580566
