@@ -24,7 +24,7 @@ public class ScrollManager : MonoBehaviour {
         float btnSpace = content.GetComponent<VerticalLayoutGroup>().spacing;
         float btnHeight = repoNode.GetComponent<LayoutElement>().preferredHeight;
 
-        prefab.transform.Find("Header/Text").GetComponent<Text>().text = "Searching Result: " + total_count;
+        prefab.transform.Find("Header/Text").GetComponent<Text>().text = "Search Results: " + total_count;
 
         for (int i = 0; i < reposDic.Count; i++)
         {
