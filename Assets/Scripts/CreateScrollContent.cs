@@ -32,6 +32,7 @@ public class CreateScrollContent : MonoBehaviour {
     }
 
     public void OnClick(string html_url){
+        print(html_url);
         // これでURLの先を開ける
         Application.OpenURL(html_url);
     }

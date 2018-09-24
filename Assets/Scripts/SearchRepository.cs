@@ -60,16 +60,7 @@ public class SearchRepository : MonoBehaviour
                 }
             }
 
-            //for (int i = 0; i < reposDic.Count; i++){
-            //    print("full_name: " + reposDic[i]["full_name"]);
-            //    print("html_url: " + reposDic[i]["html_url"]);
-            //    print("updated_at: " + reposDic[i]["updated_at"]);
-            //    print("open_issues_count: " + reposDic[i]["open_issues_count"]);
-            //    print("stargazers_count: " + reposDic[i]["stargazers_count"]);
-            //    print("----------------------------------------------");
-            //}
-
-            // Debug
+            // ScrollViewに表示させる
             Instantiate(scrollView).transform.SetParent(canvas.transform, false);
             scrollView.GetComponent<CreateScrollContent>().CreateRepoNode(total_count, reposDic);
         }
