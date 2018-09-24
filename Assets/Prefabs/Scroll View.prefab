@@ -286,7 +286,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Searching Result: 616763'
+  m_Text: 'Search Results: '
 --- !u!114 &114222546910579000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -555,7 +555,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 5.8000097, y: 4.0500793}
+  m_AnchoredPosition: {x: -19.8, y: 21.3}
   m_SizeDelta: {x: 450, y: 43.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224607913334075088
@@ -630,6 +630,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000015238335, y: -0.000015258789}
+  m_AnchoredPosition: {x: -0.000015238335, y: 0.00005340576}
   m_SizeDelta: {x: -487.5025, y: -720}
   m_Pivot: {x: 0, y: 1}
