@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class QueryParamManager : MonoBehaviour
 {
@@ -24,6 +25,8 @@ public class QueryParamManager : MonoBehaviour
     }
 
     public void ReCreateQueryParam(int pageNumber){
+        this.pageNumber = pageNumber;
+        GameObject.Find("Canvas/ScrollView/Header/Page").GetComponent<Text>().text = "Page: " + pageNumber.ToString();
         string pageParam = "page=" + pageNumber;
         string reQueryParam = pageParam + repoParam + sortParam + orderParam;
         StartCoroutine(GameObject.Find("SeardhRepository").GetComponent<SearchRepository>().StartConnection(reQueryParam));
