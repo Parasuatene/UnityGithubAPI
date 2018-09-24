@@ -8,21 +8,30 @@ public class SearchRepository : MonoBehaviour
 {
     private string total_count; // 検索ヒット数
     public List<Dictionary<string, string>> reposDic;
+    [SerializeField] GameObject canvas;
     [SerializeField] GameObject scrollManager;
+    [SerializeField] GameObject loadingEffect;
 
     public IEnumerator StartConnection(string queryParam)
     {
         string url = "https://api.github.com/search/repositories?";
         url = url + queryParam;
+        print("URL: " + url);
         string jsonText;
 
         using (WWW www = new WWW(url))
         {
+            GameObject loadingEffectPrefab = Instantiate(loadingEffect) as GameObject;
+            loadingEffectPrefab.transform.SetParent(canvas.transform, false);
+
             while (!www.isDone)
-            { // ダウンロードの進捗を表示
+            { 
+                // ダウンロードの進捗を表示
                 print(Mathf.CeilToInt(www.progress * 100));
                 yield return null;
             }
+
+            Destroy(loadingEffectPrefab);
 
             yield return www;
             print("変換前");

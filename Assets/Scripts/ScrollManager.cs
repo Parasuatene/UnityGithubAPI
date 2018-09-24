@@ -30,7 +30,7 @@ public class ScrollManager : MonoBehaviour {
         {
             GameObject node = Instantiate(repoNode) as GameObject;
             node.transform.SetParent(content, false);
-            node.transform.GetComponent<RepositoryNode>().InitParam(reposDic[i]["full_name"], reposDic[i]["html_url"]);
+            node.transform.GetComponent<RepositoryNode>().InitParam(reposDic[i]["full_name"], reposDic[i]["html_url"], reposDic[i]["stargazers_count"], reposDic[i]["open_issues_count"]);
         }
     }
 }
