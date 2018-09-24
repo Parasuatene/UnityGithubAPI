@@ -6,28 +6,16 @@ using MiniJSON;
 
 public class SearchRepository : MonoBehaviour
 {
-
     private string url = "https://api.github.com/search/repositories?";
-    private string form = "q=React&order=desc";
     private string total_count; // 検索ヒット数
     public List<Dictionary<string, string>> reposDic;
+    [SerializeField] GameObject canvas;
+    [SerializeField] GameObject scrollView;
 
-    // Use this for initialization
-    void Start()
+    public IEnumerator StartConnection(string queryParam)
     {
-        url = url + form;
-        StartCoroutine("StartConnection");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    public IEnumerator StartConnection()
-    {
-        print("コルーチン開始");
+        url = url + queryParam;
+        string jsonText;
 
         using (WWW www = new WWW(url))
         {
@@ -38,14 +26,22 @@ public class SearchRepository : MonoBehaviour
             }
 
             yield return www;
+            print("変換前");
             print(www.text);
+            jsonText = www.text;
+        }
 
+        // jsonTextを扱える形に変換する
+        jsonText = ConvertToArray(jsonText);
+
+        // データが取得できなければ, エラーメッセージを表示する.
+        try{
             // JSONデータをDeserialize, その後リストへとキャスト
-            IList reposList = (IList)Json.Deserialize(ConvertToArray(www.text));
+            IList reposList = (IList)Json.Deserialize(jsonText);
 
             reposDic = new List<Dictionary<string, string>>();
 
-            foreach(IDictionary repo in reposList)
+            foreach (IDictionary repo in reposList)
             {
                 total_count = repo["total_count"].ToString();
                 IList items = (IList)repo["items"];
@@ -64,15 +60,16 @@ public class SearchRepository : MonoBehaviour
                 }
             }
 
-            print("full_name: " + reposDic[0]["full_name"]);
-            print("html_url: " + reposDic[0]["html_url"]);
-            print("updated_at: " + reposDic[0]["updated_at"]);
-            print("open_issues_count: " + reposDic[0]["open_issues_count"]);
-            print("stargazers_count: " + reposDic[0]["stargazers_count"]);
-
+            // ScrollViewに表示させる
+            Instantiate(scrollView).transform.SetParent(canvas.transform, false);
+            scrollView.GetComponent<CreateScrollContent>().CreateRepoNode(total_count, reposDic);
+        }
+        catch{
+            Debug.Log("データを取得できませんでした。\nネットワークに接続されているか確認してください。");
         }
     }
 
+    // MiniJsonが扱える形に変換する
     private string ConvertToArray(string fetchText){
         return "[" + fetchText + "]";
     }
