@@ -6,31 +6,32 @@ using UnityEngine.UI;
 public class CreateScrollContent : MonoBehaviour {
 
     [SerializeField] GameObject repoNode;
-    [SerializeField] int repoNodeCount; // スクロールビューに表示するオブジェクトの個数
-    [SerializeField] GameObject contentObj;
+    RectTransform content;
 
+    public void CreateRepoNode(string total_count, List<Dictionary<string,string>> reposDic){
 
-	// Use this for initialization
-	void Start () {
         // Content取得
-        RectTransform content = contentObj.GetComponent<RectTransform>();
+        content = gameObject.transform.Find("Viewport/Content").GetComponent<RectTransform>();
+        print(content);
         // Contentの高さ決定
         // (repoNodeの高さ + repoNode同士の間隔)*repoNodeの個数
         float btnSpace = content.GetComponent<VerticalLayoutGroup>().spacing;
         float btnHeight = repoNode.GetComponent<LayoutElement>().preferredHeight;
 
-        repoNodeCount = 30;
+        gameObject.transform.Find("Header/Text").GetComponent<Text>().text = "Searching Result: " + total_count;
 
-        for (int i = 0; i < repoNodeCount; i++){
-            int number = i;
-            GameObject node = (GameObject)Instantiate(repoNode);
+        for (int i = 0; i < reposDic.Count; i++)
+        {
+            print(i);
+            GameObject node = Instantiate(repoNode) as GameObject;
             node.transform.SetParent(content, false);
-            node.transform.Find("RepoName/Text").GetComponent<Text>().text = number.ToString();
-            //node.transform.GetComponent<Button>().onClick.AddListener(() => OnClick());
+            node.transform.Find("RepoName/Text").GetComponent<Text>().text = reposDic[i]["full_name"];
+            node.transform.Find("RepoName").GetComponent<Button>().onClick.AddListener(() => OnClick(reposDic[i]["html_url"]));
         }
     }
 
-    public void OnClick(){
-
+    public void OnClick(string html_url){
+        // これでURLの先を開ける
+        Application.OpenURL(html_url);
     }
 }

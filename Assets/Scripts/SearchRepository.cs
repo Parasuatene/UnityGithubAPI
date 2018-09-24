@@ -60,31 +60,26 @@ public class SearchRepository : MonoBehaviour
                 }
             }
 
-            for (int i = 0; i < reposDic.Count; i++){
-                print("full_name: " + reposDic[i]["full_name"]);
-                print("html_url: " + reposDic[i]["html_url"]);
-                print("updated_at: " + reposDic[i]["updated_at"]);
-                print("open_issues_count: " + reposDic[i]["open_issues_count"]);
-                print("stargazers_count: " + reposDic[i]["stargazers_count"]);
-                print("----------------------------------------------");
-            }
+            //for (int i = 0; i < reposDic.Count; i++){
+            //    print("full_name: " + reposDic[i]["full_name"]);
+            //    print("html_url: " + reposDic[i]["html_url"]);
+            //    print("updated_at: " + reposDic[i]["updated_at"]);
+            //    print("open_issues_count: " + reposDic[i]["open_issues_count"]);
+            //    print("stargazers_count: " + reposDic[i]["stargazers_count"]);
+            //    print("----------------------------------------------");
+            //}
 
             // Debug
-            InstansiateContent();
+            Instantiate(scrollView).transform.SetParent(canvas.transform, false);
+            scrollView.GetComponent<CreateScrollContent>().CreateRepoNode(total_count, reposDic);
         }
         catch{
             Debug.Log("データを取得できませんでした。\nネットワークに接続されているか確認してください。");
         }
-
-
     }
 
     // MiniJsonが扱える形に変換する
     private string ConvertToArray(string fetchText){
         return "[" + fetchText + "]";
-    }
-
-    private void InstansiateContent(){
-        Instantiate(scrollView).transform.SetParent(canvas.transform, false);
     }
 }

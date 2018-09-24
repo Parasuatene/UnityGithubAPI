@@ -34,9 +34,6 @@ public class SearchButton : MonoBehaviour {
         print(repoName);
         string queryParam = CreateQueryParam(repoName);
 
-        // これでURLの先を開ける
-        //Application.OpenURL("https://github.com/reactnativecn/react-native-guide");
-
         // 通信開始
         StartCoroutine(searchRepo.StartConnection(queryParam));
     }
