@@ -9,6 +9,8 @@ public class SearchRepository : MonoBehaviour
     private string url = "https://api.github.com/search/repositories?";
     private string total_count; // 検索ヒット数
     public List<Dictionary<string, string>> reposDic;
+    [SerializeField] GameObject canvas;
+    [SerializeField] GameObject scrollView;
 
     public IEnumerator StartConnection(string queryParam)
     {
@@ -66,15 +68,23 @@ public class SearchRepository : MonoBehaviour
                 print("stargazers_count: " + reposDic[i]["stargazers_count"]);
                 print("----------------------------------------------");
             }
+
+            // Debug
+            InstansiateContent();
         }
         catch{
             Debug.Log("データを取得できませんでした。\nネットワークに接続されているか確認してください。");
         }
+
 
     }
 
     // MiniJsonが扱える形に変換する
     private string ConvertToArray(string fetchText){
         return "[" + fetchText + "]";
+    }
+
+    private void InstansiateContent(){
+        Instantiate(scrollView).transform.SetParent(canvas.transform, false);
     }
 }
