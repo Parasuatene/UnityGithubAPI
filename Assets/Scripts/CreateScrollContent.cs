@@ -24,7 +24,8 @@ public class CreateScrollContent : MonoBehaviour {
         {
             print(i);
             GameObject node = Instantiate(repoNode) as GameObject;
-            node.transform.SetParent(content, false);
+            // なぜかSetParentが通らなかったので強引にContentオブジェクトを取得
+            node.transform.SetParent(GameObject.Find("Scroll View(Clone)/Viewport/Content").transform, false);
             node.transform.Find("RepoName/Text").GetComponent<Text>().text = reposDic[i]["full_name"];
             node.transform.Find("RepoName").GetComponent<Button>().onClick.AddListener(() => OnClick(reposDic[i]["html_url"]));
         }
